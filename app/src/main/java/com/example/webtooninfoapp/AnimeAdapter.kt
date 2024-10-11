@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.webtooninfoapp.databinding.AnimeItemBinding
+import com.example.webtooninfoapp.model.Anime
 
-class AnimeAdapter(private val context: Context,private val animeList: List<Anime>): RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
+class AnimeAdapter(private val context: Context,
+                   private var animeList: List<Anime>,
+    private val animeViewModel: AnimeViewModel
+): RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimeViewHolder {
         val binding = AnimeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AnimeViewHolder(binding)
@@ -24,7 +28,10 @@ class AnimeAdapter(private val context: Context,private val animeList: List<Anim
             context.startActivity(intent)
         }
     }
-
+    fun updateData(newAnimeList: List<Anime>) {
+        this.animeList = newAnimeList
+        notifyDataSetChanged()
+    }
 
 
     inner class AnimeViewHolder(private val binding : AnimeItemBinding): RecyclerView.ViewHolder(binding.root) {
@@ -34,15 +41,24 @@ class AnimeAdapter(private val context: Context,private val animeList: List<Anim
             binding.tvCreator.text = anime.creator
             binding.tvReads.text = anime.reads
             binding.imageView.setImageResource(anime.imageRes)
+            if(anime.like)
+                binding.ivLike.setImageResource(R.drawable.like_filled_icon)
+            else
+                binding.ivLike.setImageResource(R.drawable.like_icon)
 
             binding.ivLike.setOnClickListener {
                 if(anime.like){
                     binding.ivLike.setImageResource(R.drawable.like_icon)
                     anime.like= false
+                    // Save the anime to the Room database when liked or unliked
+                    animeViewModel.insertAnime(anime)
                 }else{
                     binding.ivLike.setImageResource(R.drawable.like_filled_icon)
                     anime.like = true
+                    // Save the anime to the Room database when liked or unliked
+                    animeViewModel.insertAnime(anime)
                 }
+
             }
         }
     }
