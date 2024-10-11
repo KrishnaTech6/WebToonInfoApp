@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="4dp"
+    android:layout_height="240dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/anime_image"
+        tools:srcCompat="@drawable/image1" />
+
+    <LinearLayout
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:background="#BA000000"
+        android:orientation="vertical"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_creator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Writer: Chugong"
+                android:layout_weight="1"
+                android:textColor="#A4A2A2"
+                />
+            <TextView
+                android:id="@+id/tv_reads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Reads: 2.5B"
+                android:layout_marginEnd="8dp"
+                android:textColor="#A4A2A2" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    tools:text="1. Solo Levelling"
+                    android:textStyle="bold"
+                    android:fontFamily="serif"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="One of the best action fantasy manhwa and the most talked about adaptation in recent times is undoubtedly Solo Leveling. It is set in a world where humans have discovered supernatural skills, while our protagonist, Sung Jin-Woo, is a nobody with his E-Rank hunting skills. Things will take an interesting turn for him when he becomes the sole survivor of a dungeon raid. Awakened with strange new powers, Sung Jin-Woo will level up from being the weakest Hunter and eventually become the most powerful entity in the universe."
+                    android:textColor="@color/white"
+                    android:maxLines="3"
+                    android:ellipsize="end"/>
+
+
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".2"
+                android:clickable="true"
+                android:contentDescription="@string/like"
+                android:focusable="true"
+                android:padding="16dp"
+                android:src="@drawable/like_icon" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
