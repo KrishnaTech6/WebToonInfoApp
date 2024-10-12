@@ -37,15 +37,20 @@ class AnimeDetailsActivity : AppCompatActivity() {
 
             // Check if anime is liked
             updateLikeIcon(anime.like)
+            binding.ratingBar.rating = anime.rating
+            binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+                anime.rating = rating
+                animeViewModel.insertOrUpdateAnime(anime)
+            }
 
             binding.ivAnimeLike.setOnClickListener {
                 anime.like = !anime.like
                 updateLikeIcon(anime.like)
                 if (anime.like) {
-                    animeViewModel.insertAnime(anime)
+                    animeViewModel.insertOrUpdateAnime(anime)
                     Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
                 } else {
-                    animeViewModel.insertAnime(anime)  // Update in DB even when unliked
+                    animeViewModel.insertOrUpdateAnime(anime)  // Update in DB even when unliked
                 }
             }
         }

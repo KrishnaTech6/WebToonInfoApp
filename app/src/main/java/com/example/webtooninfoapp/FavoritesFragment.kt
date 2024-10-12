@@ -18,15 +18,17 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        animeViewModel = ViewModelProvider(this).get(AnimeViewModel::class.java)
+
+
         val animeAdapter = AnimeAdapter(requireContext(), mutableListOf(), animeViewModel)
         binding.rvAnimeFavorites.adapter = animeAdapter
         binding.rvAnimeFavorites.layoutManager = LinearLayoutManager(requireContext())
 
-        animeViewModel = ViewModelProvider(this).get(AnimeViewModel::class.java)
-
         // Observe favorite anime list
         animeViewModel.getFavoriteAnimes().observe(viewLifecycleOwner) { favoriteAnimes ->
             animeAdapter.updateData(favoriteAnimes)  // Assuming updateData() is implemented in AnimeAdapter
+            binding.tvNoFavorites.visibility = if (favoriteAnimes.isEmpty()) View.VISIBLE else View.GONE
         }
         return binding.root
     }
